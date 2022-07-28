@@ -19,6 +19,6 @@ export const ACM = {
 export const ProductsAPIGateway = {
     id: "productsAPIGateway",
     name: `${ENVIRONMENT}-${SERVICE}API`,
-    description: "",
+    description: "Jomicu Products API",
     basePath: "products"
 }
