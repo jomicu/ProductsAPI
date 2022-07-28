@@ -1,4 +1,4 @@
-name: Deploy Users API
+name: Deploy Products API
 
 on: workflow_dispatch
 
@@ -7,7 +7,7 @@ env:
 
 jobs:
   deploy:
-    name: Deploy ProductsAPI with Serverless
+    name: Deploy ProductsAPI with AWS CDK
     runs-on: ubuntu-latest
     steps:
       - name: Set environment
