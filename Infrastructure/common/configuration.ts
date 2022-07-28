@@ -6,9 +6,19 @@ export const CREATE_PRODUCTS_LAMBDA_NAME = `${ENVIRONMENT}-${SERVICE}API-create-
 export const GET_PRODUCTS_LAMBDA_NAME = `${ENVIRONMENT}-${SERVICE}API-get-products`;
 export const PRODUCTS_TABLE_NAME = `${ENVIRONMENT}-${SERVICE}-Table`;
 
-export const PRODUCTS_API_GATEWAY = {
-    NAME: `${ENVIRONMENT}-${SERVICE}API`,
-    DESCRIPTION: "",
-    DOMAIN: "api-development.jomicu.com",
-    BASE_PATH: "products"
+export const Route53 = {
+    id: "route53",
+    zoneName: "jomicu.com"
+}
+
+export const ACM = {
+    id: "certificate",
+    domainName: "api-development.jomicu.com",
+}
+
+export const ProductsAPIGateway = {
+    id: "productsAPIGateway",
+    name: `${ENVIRONMENT}-${SERVICE}API`,
+    description: "",
+    basePath: "products"
 }
