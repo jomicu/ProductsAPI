@@ -46,6 +46,10 @@ jobs:
         working-directory: ${{ env.INFRASTRUCTURE_DIRECTORY }}
         run: npm install
 
+      - name: CDK Bootstrap
+        working-directory: ${{ env.INFRASTRUCTURE_DIRECTORY }}
+        run: cdk bootstrap
+
       - name: CDK Synth
         working-directory: ${{ env.INFRASTRUCTURE_DIRECTORY }}
         run: cdk synth
