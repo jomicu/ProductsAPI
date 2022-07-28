@@ -27,8 +27,10 @@ jobs:
         with:
           node-version: "16"
 
-      - name: Install AWS CDK
-        run: sudo npm install -g aws-cdk
+      - name: Install Python 3.9
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.9"
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -37,12 +39,15 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region:  ${{ secrets.AWS_REGION }}
 
+      - name: Install AWS CDK
+        run: npm install -g aws-cdk
+
       - name: Install dependencies
-        working-directory: INFRASTRUCTURE_DIRECTORY
+        working-directory: ${{ env.INFRASTRUCTURE_DIRECTORY }}
         run: npm install
 
       - name: CDK Synth
-        working-directory: INFRASTRUCTURE_DIRECTORY
+        working-directory: ${{ env.INFRASTRUCTURE_DIRECTORY }}
         run: cdk synth
 
       - name: CDK Deploy
