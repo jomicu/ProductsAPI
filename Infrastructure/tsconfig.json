@@ -21,7 +21,12 @@
     "strictPropertyInitialization": false,
     "typeRoots": [
       "./node_modules/@types"
-    ]
+    ],
+    "baseUrl": "../",
+    "paths": {
+      "@infrastructure/*": ["./Infrastructure/*"],
+      "@application/*": ["./Application/*"]
+    }
   },
   "exclude": [
     "node_modules",

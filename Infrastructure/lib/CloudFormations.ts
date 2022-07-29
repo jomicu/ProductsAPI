@@ -1,22 +1,22 @@
-import { Stack, StackProps } from "aws-cdk-lib";
 import { Construct } from "constructs";
-import { buildProductsTable } from "./Tables"
-import { buildCreateProductsLambda } from "./Lambdas";
-import { buildProductsAPIGateway } from "./APIGateways";
-import { getRoute53 } from "./Route53";
-import { getCertificate } from "./ACM";
+import { Stack, StackProps } from "aws-cdk-lib";
+import { getJomicuRoute53 } from "@infrastructure/lib/Route53";
+import { getJomicuCertificate } from "@infrastructure/lib/ACM";
+import { buildProductsAPIGateway } from "@infrastructure/lib/APIGateways";
+import { buildCreateProductsLambda } from "@infrastructure/lib/Lambdas";
+import { buildProductsTable } from "@infrastructure/lib/Tables";
 
 export class ProductsAPIStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
 
-    const route53 = getRoute53(this);
+    const route53 = getJomicuRoute53(this);
 
-    const certificate = getCertificate(this, route53);
+    const certificate = getJomicuCertificate(this, route53);
 
     const productsTable = buildProductsTable(this);
 
-    const createProductsLambda = buildCreateProductsLambda(this);
+    const createProductsLambda = buildCreateProductsLambda(this, productsTable);
 
     const productsAPI = buildProductsAPIGateway(this, route53, certificate, createProductsLambda);
 

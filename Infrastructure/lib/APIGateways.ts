@@ -1,11 +1,12 @@
-import { ProductsAPIGateway } from "../common/configuration";
 import { Construct } from "constructs";
 import { Function } from "aws-cdk-lib/aws-lambda";
 import { HostedZone } from "aws-cdk-lib/aws-route53";
 import { Certificate } from "aws-cdk-lib/aws-certificatemanager";
-import { RestApi, RestApiProps, DomainNameOptions, LambdaIntegration, ApiKeySourceType, LambdaIntegrationOptions, MethodOptions, EndpointType, EndpointConfiguration, ModelOptions, PassthroughBehavior, IntegrationResponse } from "aws-cdk-lib/aws-apigateway";
-import { CreateProductsRequestModel } from "./JsonSchemas";
-import { CreateProductsRequestTemplate, CreateProductsResponsesTemplates } from "./Templates";
+import { RestApi, RestApiProps, DomainNameOptions, LambdaIntegration, ApiKeySourceType, LambdaIntegrationOptions, MethodOptions, EndpointType, EndpointConfiguration, ModelOptions, PassthroughBehavior } from "aws-cdk-lib/aws-apigateway";
+import { CreateProductsRequestModel } from "@infrastructure/lib/JsonSchemas";
+import { CreateProductsRequestTemplate, CreateProductsResponsesTemplates } from "@infrastructure/lib/Templates";
+
+import { ENVIRONMENT, SERVICE } from "@infrastructure/common/configuration";
 
 export const buildProductsAPIGateway = (
     context: Construct,
@@ -13,13 +14,13 @@ export const buildProductsAPIGateway = (
     certificate: Certificate,
     createProductsLambda: Function
 ): RestApi => {
-    const productsAPI = new RestApi(context, ProductsAPIGateway.id, <RestApiProps>{
-        restApiName: ProductsAPIGateway.name,
-        description: ProductsAPIGateway.description,
+    const productsAPI = new RestApi(context, "productsAPIGateway", <RestApiProps>{
+        restApiName: `${ENVIRONMENT}-${SERVICE}API`,
+        description: "Jomicu Products API",
         domainName: <DomainNameOptions>{
           domainName: route53.zoneName,
           certificate: certificate,
-          basePath: ProductsAPIGateway.basePath
+          basePath: "products"
         },
         endpointConfiguration: <EndpointConfiguration>{
             types: [EndpointType.REGIONAL]
