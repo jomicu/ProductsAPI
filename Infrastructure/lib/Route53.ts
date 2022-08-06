@@ -1,10 +1,8 @@
 import { Construct } from "constructs";
-import { HostedZone } from "aws-cdk-lib/aws-route53";
-
-
+import { HostedZone, HostedZoneAttributes } from "aws-cdk-lib/aws-route53";
 
 export const getJomicuRoute53 = (context: Construct) => { 
-    return new HostedZone(context, "HostedZone", {
+    return HostedZone.fromHostedZoneAttributes(context, "HostedZone", <HostedZoneAttributes>{
         zoneName: "jomicu.com",
     });
 }

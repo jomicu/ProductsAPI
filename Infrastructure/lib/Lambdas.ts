@@ -2,7 +2,7 @@ import { Construct } from "constructs";
 import { Table } from "aws-cdk-lib/aws-dynamodb";
 import { Function, Runtime, Architecture, Code, FunctionProps } from "aws-cdk-lib/aws-lambda";
 import { join } from "path";
-import { ENVIRONMENT, SERVICE } from "@infrastructure/common/configuration";
+import { ENVIRONMENT, SERVICE } from "@infrastructure/configuration";
 
 export const buildCreateProductsLambda = (context: Construct, productsTable: Table): Function => {
     return new Function(context, "CreateProductsLambda", <FunctionProps>{

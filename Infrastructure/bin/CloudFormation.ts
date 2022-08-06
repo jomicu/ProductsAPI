@@ -1,7 +1,7 @@
 import "source-map-support/register";
 import { App } from "aws-cdk-lib";
 import { ProductsAPIStack } from "@infrastructure/lib/CloudFormations";
-import { ENVIRONMENT, SERVICE } from "@infrastructure/common/configuration";
+import { ENVIRONMENT, SERVICE } from "@infrastructure/configuration";
 
 const app = new App();
 
