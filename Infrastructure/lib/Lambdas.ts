@@ -5,7 +5,7 @@ import { join } from "path";
 import { ENVIRONMENT, SERVICE } from "@infrastructure/common/configuration";
 
 export const buildCreateProductsLambda = (context: Construct, productsTable: Table): Function => {
-    return new Function(context, "createProductsLambda", <FunctionProps>{
+    return new Function(context, "CreateProductsLambda", <FunctionProps>{
         functionName: `${ENVIRONMENT}-${SERVICE}API-create-products`,
         runtime: Runtime.PYTHON_3_9,
         architecture: Architecture.X86_64,

@@ -14,11 +14,13 @@ export const buildProductsAPIGateway = (
     certificate: Certificate,
     createProductsLambda: Function
 ): RestApi => {
-    const productsAPI = new RestApi(context, "productsAPIGateway", <RestApiProps>{
+    let domainName = "api-development.jomicu.com"
+
+    const productsAPI = new RestApi(context, "ProductsAPIGateway", <RestApiProps>{
         restApiName: `${ENVIRONMENT}-${SERVICE}API`,
         description: "Jomicu Products API",
         domainName: <DomainNameOptions>{
-          domainName: route53.zoneName,
+          domainName: domainName,
           certificate: certificate,
           basePath: "products"
         },
