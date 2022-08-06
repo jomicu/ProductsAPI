@@ -26,6 +26,9 @@
     "paths": {
       "@infrastructure/*": ["./Infrastructure/*"],
       "@application/*": ["./Application/*"]
+    },
+    "ts-node": {
+      "require": ["tsconfig-paths/register"]
     }
   },
   "exclude": [

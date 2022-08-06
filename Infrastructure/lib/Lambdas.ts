@@ -10,7 +10,7 @@ export const buildCreateProductsLambda = (context: Construct, productsTable: Tab
         runtime: Runtime.PYTHON_3_9,
         architecture: Architecture.X86_64,
         code: Code.fromAsset(join(__dirname, "../../Application/create_products")),
-        handler: "create_products.handler",
+        handler: "handler.handle_event",
         environment: {
             STAGE: ENVIRONMENT,
             PRODUCTS_TABLE_NAME: productsTable.tableName

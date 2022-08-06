@@ -15,7 +15,7 @@ class Response(object):
     status_code: int
     products: list[Product]    
 
-def handler(event, context):
+def handle_event(event, context):
     request = Request(**event)
 
     products = [Product(id=str(uuid4()), **product) for product in request.products]
