@@ -18,7 +18,7 @@ export const createARecord = (context: Construct, zone: IHostedZone, domainName:
 }
 
 export const createAaaaRecord = (context: Construct, zone: IHostedZone, domainName: DomainName): AaaaRecord => {
-    return new AaaaRecord(context, "ARecord", <AaaaRecordProps>{
+    return new AaaaRecord(context, "AaaaRecord", <AaaaRecordProps>{
         zone: zone,
         target: RecordTarget.fromAlias(new ApiGatewayDomain(domainName))
     });
