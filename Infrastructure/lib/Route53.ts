@@ -1,8 +1,13 @@
 import { Construct } from "constructs";
-import { HostedZone, HostedZoneAttributes, IHostedZone } from "aws-cdk-lib/aws-route53";
+import { HostedZone, HostedZoneProps, HostedZoneProviderProps } from "aws-cdk-lib/aws-route53";
+import { DOMAIN } from "@infrastructure/configuration";
 
-export const getJomicuRoute53 = (context: Construct): IHostedZone => { 
-    return HostedZone.fromHostedZoneAttributes(context, "HostedZone", <HostedZoneAttributes>{
-        zoneName: "jomicu.com",
-    });
+export const getJomicuRoute53 = (context: Construct): HostedZone => { 
+    // const hostedZone = HostedZone.fromLookup(context, "HostedZone", <HostedZoneProviderProps>{
+    //     domainName: "jomicu.com"
+    // });
+
+    return new HostedZone(context, "HostedZone", <HostedZoneProps>{
+        zoneName: `${DOMAIN}.`
+    })
 }
