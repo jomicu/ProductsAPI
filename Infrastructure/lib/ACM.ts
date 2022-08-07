@@ -6,7 +6,7 @@ import { DOMAIN } from "@infrastructure/configuration";
 
 export const getJomicuCertificate = (context: Construct, hostedZone: IHostedZone): Certificate => {
     return new Certificate(context, "Certificate", {
-        domainName: DOMAIN,
+        domainName: `*.${DOMAIN}`,
         validation: CertificateValidation.fromDns(hostedZone),
   });
 }
