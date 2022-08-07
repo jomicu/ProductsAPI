@@ -6,11 +6,10 @@ import { RestApi, RestApiProps, DomainNameOptions, LambdaIntegration, ApiKeySour
 import { CreateProductsRequestModel } from "@infrastructure/lib/JsonSchemas";
 import { CreateProductsRequestTemplate, CreateProductsResponsesTemplates } from "@infrastructure/lib/Templates";
 
-import { ENVIRONMENT, SERVICE, DOMAIN, BASE_PATH } from "@infrastructure/configuration";
+import { ENVIRONMENT, SERVICE, ENDPOINT, BASE_PATH } from "@infrastructure/configuration";
 
 export const buildProductsAPIGateway = (
     context: Construct,
-    route53: HostedZone,
     certificate: Certificate,
     createProductsLambda: Function
 ): RestApi => {
@@ -18,7 +17,8 @@ export const buildProductsAPIGateway = (
         restApiName: `${ENVIRONMENT}-${SERVICE}API`,
         description: "Jomicu Products API",
         domainName: <DomainNameOptions>{
-          domainName: DOMAIN,
+          domainName: ENDPOINT,
+          certificate: certificate,
           basePath: BASE_PATH
         },
         endpointConfiguration: <EndpointConfiguration>{
