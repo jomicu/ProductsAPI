@@ -5,8 +5,8 @@ import { DomainName } from "aws-cdk-lib/aws-apigateway";
 import { DOMAIN } from "@infrastructure/configuration";
 
 export const getJomicuRoute53 = (context: Construct): IHostedZone => { 
-    return HostedZone.fromHostedZoneAttributes(context, "HostedZone", <HostedZoneAttributes>{
-        zoneName: DOMAIN
+    return HostedZone.fromLookup(context, "HostedZone", <HostedZoneProviderProps>{
+        domainName: DOMAIN
     });
 }
 
