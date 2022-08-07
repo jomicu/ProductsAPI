@@ -10,16 +10,17 @@ export class ProductsAPIStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
 
+    const route53 = getJomicuRoute53(this);
+
+    const certificate = getJomicuCertificate(this, route53);
+
     const productsTable = buildProductsTable(this);
 
     const createProductsLambda = buildCreateProductsLambda(this, productsTable);
 
     const productsAPI = buildProductsAPIGateway(this, certificate, createProductsLambda);
 
-    const route53 = getJomicuRoute53(this);
-
     if (productsAPI.domainName) {
-      const certificate = getJomicuCertificate(this, route53, productsAPI.domainName);
       const cnameRecord = createCnameRecord(this, route53, productsAPI.domainName);
       //const aRecord = createARecord(this, route53, productsAPI.domainName);
       //const aaaaRecord = createAaaaRecord(this, route53, productsAPI.domainName);
