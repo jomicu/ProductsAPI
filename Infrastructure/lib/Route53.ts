@@ -11,7 +11,7 @@ export const getJomicuRoute53 = (context: Construct): IHostedZone => {
 }
 
 export const createCnameRecord = (context: Construct, zone: IHostedZone, domainName: DomainName) => {
-    return new CnameRecord(context, "", <CnameRecordProps>{
+    return new CnameRecord(context, "CnameRecord", <CnameRecordProps>{
         zone: zone,
         recordName: "Products API Cname Record",
         domainName: domainName.domainName
