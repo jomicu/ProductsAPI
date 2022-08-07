@@ -3,7 +3,8 @@ export const SERVICE = process.env.SERVICE || "Products";
 
 export const DOMAIN = "jomicu.com"
 export const ENDPOINT = "api-development.jomicu.com"
-export const CERTIFICATE_NAME = "api-development.jomicu.com"
+export const CERTIFICATE_DOMAIN_NAME = `*.${DOMAIN}`
+
 export const HOSTED_ZONE_NAMES = "jomicu.com."
 export const BASE_PATH = "products"
 

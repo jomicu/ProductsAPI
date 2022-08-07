@@ -4,13 +4,13 @@ import { ApiGateway } from "aws-cdk-lib/aws-route53-targets";
 import { DomainName, RestApi } from "aws-cdk-lib/aws-apigateway";
 import { DOMAIN } from "@infrastructure/configuration";
 
-export const getJomicuRoute53 = (context: Construct): IHostedZone => { 
-    return HostedZone.fromLookup(context, "HostedZone", <HostedZoneProviderProps>{
-        domainName: DOMAIN
+export const getJomicuRoute53 = (context: Construct): HostedZone => { 
+    return new HostedZone(context, "HostedZone", <HostedZoneProps>{
+        zoneName: DOMAIN
     });
 }
 
-export const createCnameRecord = (context: Construct, zone: IHostedZone, domainName: DomainName) => {
+export const createCnameRecord = (context: Construct, zone: HostedZone, domainName: DomainName) => {
     return new CnameRecord(context, "CnameRecord", <CnameRecordProps>{
         zone: zone,
         recordName: "Products API Cname Record",
@@ -18,7 +18,7 @@ export const createCnameRecord = (context: Construct, zone: IHostedZone, domainN
     });
 }
 
-export const createARecord = (context: Construct, zone: IHostedZone, api: RestApi): ARecord => {
+export const createARecord = (context: Construct, zone: HostedZone, api: RestApi): ARecord => {
     return new ARecord(context, "ARecord", <ARecordProps>{
         recordName: "Products API ARecord",
         zone: zone,
