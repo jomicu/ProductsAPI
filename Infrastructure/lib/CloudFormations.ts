@@ -21,8 +21,8 @@ export class ProductsAPIStack extends Stack {
     const productsAPI = buildProductsAPIGateway(this, route53, certificate, createProductsLambda);
 
     if (productsAPI.domainName) {
-      const cnameRecord = createCnameRecord(this, route53, productsAPI.domainName);
-      //const aRecord = createARecord(this, route53, productsAPI.domainName);
+      //const cnameRecord = createCnameRecord(this, route53, productsAPI.domainName);
+      const aRecord = createARecord(this, route53, productsAPI.domainName);
       //const aaaaRecord = createAaaaRecord(this, route53, productsAPI.domainName);
     }
 
