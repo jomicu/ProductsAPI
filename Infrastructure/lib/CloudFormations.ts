@@ -18,11 +18,11 @@ export class ProductsAPIStack extends Stack {
 
     const createProductsLambda = buildCreateProductsLambda(this, productsTable);
 
-    const productsAPI = buildProductsAPIGateway(this, certificate, createProductsLambda);
+    const productsAPI = buildProductsAPIGateway(this, route53, certificate, createProductsLambda);
 
     if (productsAPI.domainName) {
       //const cnameRecord = createCnameRecord(this, route53, productsAPI.domainName);
-      const aRecord = createARecord(this, route53, productsAPI);
+      const aRecord = createARecord(this, route53, productsAPI.domainName);
       //const aaaaRecord = createAaaaRecord(this, route53, productsAPI.domainName);
     }
 

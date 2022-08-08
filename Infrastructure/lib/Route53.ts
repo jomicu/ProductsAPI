@@ -1,6 +1,6 @@
 import { Construct } from "constructs";
 import { AaaaRecord, AaaaRecordProps, ARecord, ARecordProps, IHostedZone, HostedZone, HostedZoneProps, HostedZoneProviderProps, RecordTarget, HostedZoneAttributes, CnameRecord, CnameRecordProps } from "aws-cdk-lib/aws-route53";
-import { ApiGateway } from "aws-cdk-lib/aws-route53-targets";
+import { ApiGateway, ApiGatewayDomain } from "aws-cdk-lib/aws-route53-targets";
 import { DomainName, RestApi } from "aws-cdk-lib/aws-apigateway";
 import { DOMAIN } from "@infrastructure/configuration";
 
@@ -18,11 +18,11 @@ export const createCnameRecord = (context: Construct, zone: HostedZone, domainNa
     });
 }
 
-export const createARecord = (context: Construct, zone: HostedZone, api: RestApi): ARecord => {
+export const createARecord = (context: Construct, zone: HostedZone, domainName: DomainName): ARecord => {
     return new ARecord(context, "ARecord", <ARecordProps>{
         recordName: "Products API ARecord",
         zone: zone,
-        target: RecordTarget.fromAlias(new ApiGateway(api))
+        target: RecordTarget.fromAlias(new ApiGatewayDomain(domainName))
     });
 }
 
