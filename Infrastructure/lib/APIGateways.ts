@@ -36,13 +36,12 @@ export const buildProductsAPIGateway = (
               "Authorization",
               "X-Api-Key",
             ],
-            allowMethods: ["POST"],
-            allowCredentials: true,
-            //allowOrigins: ["http://localhost:3000"],
+            allowMethods: ["POST"]
+            //allowOrigins: ["http://localhost:3000"]
           }
     });
 
-    productsAPI.addApiKey("DefaultAPIKey");
+    //productsAPI.addApiKey("DefaultAPIKey");
 
     const createProductsLambdaIntegration = new LambdaIntegration(createProductsLambda, <LambdaIntegrationOptions>{
         proxy: false,
