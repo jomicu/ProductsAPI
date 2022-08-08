@@ -2,7 +2,7 @@ import { Construct } from "constructs";
 import { Function } from "aws-cdk-lib/aws-lambda";
 import { IHostedZone } from "aws-cdk-lib/aws-route53";
 import { Certificate } from "aws-cdk-lib/aws-certificatemanager";
-import { RestApi, RestApiProps, DomainNameOptions, LambdaIntegration, ApiKeySourceType, LambdaIntegrationOptions, MethodOptions, EndpointType, EndpointConfiguration, ModelOptions, PassthroughBehavior, ApiKeyOptions, ApiKey, ApiKeyProps, UsagePlan, UsagePlanProps } from "aws-cdk-lib/aws-apigateway";
+import { RestApi, RestApiProps, DomainNameOptions, LambdaIntegration, ApiKeySourceType, LambdaIntegrationOptions, MethodOptions, EndpointType, EndpointConfiguration, ModelOptions, PassthroughBehavior, ApiKeyOptions, ApiKey, ApiKeyProps, UsagePlan, UsagePlanProps, CorsOptions } from "aws-cdk-lib/aws-apigateway";
 import { CreateProductsRequestModel } from "@infrastructure/lib/JsonSchemas";
 import { CreateProductsRequestTemplate, CreateProductsResponsesTemplates } from "@infrastructure/lib/Templates";
 
@@ -29,15 +29,15 @@ export const buildProductsAPIGateway = (
             types: [EndpointType.REGIONAL]
         },
         apiKeySourceType: ApiKeySourceType.HEADER,
-        defaultCorsPreflightOptions: {
+        defaultCorsPreflightOptions: <CorsOptions>{
             allowHeaders: [
               "Content-Type",
               "X-Amz-Date",
               "Authorization",
               "X-Api-Key",
             ],
-            allowMethods: ["POST"]
-            //allowOrigins: ["http://localhost:3000"]
+            allowMethods: ["POST"],
+            allowOrigins: ["*"]
           }
     });
 
