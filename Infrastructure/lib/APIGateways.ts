@@ -17,6 +17,7 @@ export const buildProductsAPIGateway = (
     const productsAPI = new RestApi(context, "ProductsAPIGateway", <RestApiProps>{
         restApiName: `${ENVIRONMENT}-${SERVICE}API`,
         description: "Jomicu Products API",
+        disableExecuteApiEndpoint: true,
         deployOptions: {
             stageName: ENVIRONMENT,
         },
