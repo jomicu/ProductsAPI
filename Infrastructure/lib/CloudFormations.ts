@@ -1,6 +1,6 @@
 import { Construct } from "constructs";
 import { Stack, StackProps } from "aws-cdk-lib";
-import { getJomicuRoute53, createCnameRecord, createARecord } from "@infrastructure/lib/Route53";
+import { getJomicuRoute53, createCnameRecord, createARecord, createAaaaRecord } from "@infrastructure/lib/Route53";
 import { getJomicuCertificate } from "@infrastructure/lib/ACM";
 import { buildProductsAPIGateway } from "@infrastructure/lib/APIGateways";
 import { buildCreateProductsLambda } from "@infrastructure/lib/Lambdas";
@@ -23,7 +23,7 @@ export class ProductsAPIStack extends Stack {
     if (productsAPI.domainName) {
       //const cnameRecord = createCnameRecord(this, route53, productsAPI.domainName);
       const aRecord = createARecord(this, route53, productsAPI.domainName);
-      //const aaaaRecord = createAaaaRecord(this, route53, productsAPI.domainName);
+      const aaaaRecord = createAaaaRecord(this, route53, productsAPI.domainName);
     }
 
     productsTable.grantWriteData(createProductsLambda);

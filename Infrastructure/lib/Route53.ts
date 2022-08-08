@@ -20,15 +20,16 @@ export const createCnameRecord = (context: Construct, zone: IHostedZone, domainN
 
 export const createARecord = (context: Construct, zone: IHostedZone, domainName: DomainName): ARecord => {
     return new ARecord(context, "ARecord", <ARecordProps>{
+        recordName: domainName.domainName,
         zone: zone,
         target: RecordTarget.fromAlias(new ApiGatewayDomain(domainName))
     });
 }
 
-// export const createAaaaRecord = (context: Construct, zone: IHostedZone, domainName: DomainName): AaaaRecord => {
-//     return new AaaaRecord(context, "AaaaRecord", <AaaaRecordProps>{
-//         recordName: "Products API AaaaRecord",
-//         zone: zone,
-//         target: RecordTarget.fromAlias(new ApiGatewayDomain(domainName))
-//     });
-// }
+export const createAaaaRecord = (context: Construct, zone: IHostedZone, domainName: DomainName): AaaaRecord => {
+    return new AaaaRecord(context, "AaaaRecord", <AaaaRecordProps>{
+        recordName: domainName.domainName,
+        zone: zone,
+        target: RecordTarget.fromAlias(new ApiGatewayDomain(domainName))
+    });
+}
