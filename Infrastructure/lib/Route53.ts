@@ -14,14 +14,12 @@ export const getJomicuRoute53 = (context: Construct): IHostedZone => {
 export const createCnameRecord = (context: Construct, zone: IHostedZone, domainName: DomainName) => {
     return new CnameRecord(context, "CnameRecord", <CnameRecordProps>{
         zone: zone,
-        recordName: "Products API Cname Record",
         domainName: domainName.domainName
     });
 }
 
 export const createARecord = (context: Construct, zone: IHostedZone, domainName: DomainName): ARecord => {
     return new ARecord(context, "ARecord", <ARecordProps>{
-        recordName: "Products API ARecord",
         zone: zone,
         target: RecordTarget.fromAlias(new ApiGatewayDomain(domainName))
     });
