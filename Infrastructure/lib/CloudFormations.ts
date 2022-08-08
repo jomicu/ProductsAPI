@@ -22,7 +22,7 @@ export class ProductsAPIStack extends Stack {
 
     if (productsAPI.domainName) {
       const cnameRecord = createCnameRecord(this, route53, productsAPI.domainName);
-      const aRecord = createARecord(this, route53, productsAPI.domainName);
+      //const aRecord = createARecord(this, route53, productsAPI.domainName);
       //const aaaaRecord = createAaaaRecord(this, route53, productsAPI.domainName);
     }
 
