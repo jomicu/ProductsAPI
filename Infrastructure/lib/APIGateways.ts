@@ -42,7 +42,7 @@ export const buildProductsAPIGateway = (
           }
     });
 
-    //productsAPI.addApiKey("DefaultAPIKey");
+    productsAPI.addApiKey("DefaultAPIKey");
 
     const createProductsLambdaIntegration = new LambdaIntegration(createProductsLambda, <LambdaIntegrationOptions>{
         proxy: false,
