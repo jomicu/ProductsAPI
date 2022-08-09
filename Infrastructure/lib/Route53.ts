@@ -2,7 +2,7 @@ import { Construct } from "constructs";
 import { AaaaRecord, AaaaRecordProps, ARecord, ARecordProps, IHostedZone, HostedZone, HostedZoneProps, HostedZoneProviderProps, RecordTarget, HostedZoneAttributes, CnameRecord, CnameRecordProps } from "aws-cdk-lib/aws-route53";
 import { ApiGateway, ApiGatewayDomain } from "aws-cdk-lib/aws-route53-targets";
 import { DomainName, RestApi } from "aws-cdk-lib/aws-apigateway";
-import { DOMAIN } from "@infrastructure/configuration";
+import { SUBDOMAIN, DOMAIN } from "@infrastructure/configuration";
 
 export const getJomicuRoute53 = (context: Construct): IHostedZone => { 
     return HostedZone.fromHostedZoneAttributes(context, "HostedZone", <HostedZoneAttributes>{
@@ -20,7 +20,7 @@ export const createCnameRecord = (context: Construct, zone: IHostedZone, domainN
 
 export const createARecord = (context: Construct, zone: IHostedZone, domainName: DomainName): ARecord => {
     return new ARecord(context, "ARecord", <ARecordProps>{
-        recordName: domainName.domainName,
+        recordName: SUBDOMAIN,
         zone: zone,
         target: RecordTarget.fromAlias(new ApiGatewayDomain(domainName))
     });
@@ -28,7 +28,7 @@ export const createARecord = (context: Construct, zone: IHostedZone, domainName:
 
 export const createAaaaRecord = (context: Construct, zone: IHostedZone, domainName: DomainName): AaaaRecord => {
     return new AaaaRecord(context, "AaaaRecord", <AaaaRecordProps>{
-        recordName: domainName.domainName,
+        recordName: SUBDOMAIN,
         zone: zone,
         target: RecordTarget.fromAlias(new ApiGatewayDomain(domainName))
     });
