@@ -4,7 +4,7 @@ import { ENVIRONMENT, SERVICE } from "@infrastructure/configuration";
 
 export const buildProductsTable = (context: Construct): Table => {
     return new Table(context, "ProductsTable", <TableProps>{
-        tableName: `${ENVIRONMENT}-${SERVICE}Table`,
+        tableName: `${ENVIRONMENT}-${SERVICE}-table`,
         billingMode: BillingMode.PAY_PER_REQUEST,
         partitionKey: { name: "id", type: AttributeType.STRING }
     });
