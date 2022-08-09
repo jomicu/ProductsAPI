@@ -70,12 +70,12 @@ export const buildProductsAPIGateway = (
 
     createProductsResource.addMethod("POST", createProductsLambdaIntegration, <MethodOptions>{
         apiKeyRequired: true,
-        requestValidator: new RequestValidator(context, "CreateProductsRequestValidator", <RequestValidatorProps>{
+        requestValidator: productsAPI.addRequestValidator("CreateProductsRequestValidator", <RequestValidatorProps>{
             restApi: productsAPI,
             validateRequestBody: true,
         }),
         requestModels: {
-            "application/json": new Model(context, "CreateProductsModel", <ModelProps>{
+            "application/json": productsAPI.addModel("CreateProductsModel", <ModelProps>{
                 contentType: "application/json",
                 description: "Create products request JSON schema",
                 modelName: "CreateProductsRequestModel",
