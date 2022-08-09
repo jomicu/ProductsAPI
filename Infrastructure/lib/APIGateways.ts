@@ -2,7 +2,7 @@ import { Construct } from "constructs";
 import { Function } from "aws-cdk-lib/aws-lambda";
 import { IHostedZone } from "aws-cdk-lib/aws-route53";
 import { Certificate } from "aws-cdk-lib/aws-certificatemanager";
-import { RestApi, RestApiProps, DomainNameOptions, LambdaIntegration, ApiKeySourceType, LambdaIntegrationOptions, MethodOptions, EndpointType, EndpointConfiguration, ModelOptions, PassthroughBehavior, ApiKeyOptions, ApiKey, ApiKeyProps, UsagePlan, UsagePlanProps, CorsOptions, ThrottleSettings, UsagePlanPerApiStage } from "aws-cdk-lib/aws-apigateway";
+import { RestApi, RestApiProps, DomainNameOptions, LambdaIntegration, ApiKeySourceType, LambdaIntegrationOptions, MethodOptions, EndpointType, EndpointConfiguration, ModelOptions, PassthroughBehavior, ApiKeyOptions, ApiKey, ApiKeyProps, UsagePlan, UsagePlanProps, CorsOptions, ThrottleSettings, UsagePlanPerApiStage, Model, ModelProps, RequestValidator, RequestValidatorProps } from "aws-cdk-lib/aws-apigateway";
 import { CreateProductsRequestModel } from "@infrastructure/lib/JsonSchemas";
 import { CreateProductsRequestTemplate, CreateProductsResponsesTemplates } from "@infrastructure/lib/Templates";
 
@@ -70,8 +70,12 @@ export const buildProductsAPIGateway = (
 
     createProductsResource.addMethod("POST", createProductsLambdaIntegration, <MethodOptions>{
         apiKeyRequired: true,
+        requestValidator: new RequestValidator(context, "CreateProductsRequestValidator", <RequestValidatorProps>{
+            restApi: productsAPI,
+            validateRequestBody: true,
+        }),
         requestModels: {
-            "application/json": productsAPI.addModel("CreateProductsModel", <ModelOptions>{
+            "application/json": new Model(context, "CreateProductsModel", <ModelProps>{
                 contentType: "application/json",
                 description: "Create products request JSON schema",
                 modelName: "CreateProductsRequestModel",
