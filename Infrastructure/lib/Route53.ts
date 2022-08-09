@@ -3,11 +3,12 @@ import { AaaaRecord, AaaaRecordProps, ARecord, ARecordProps, IHostedZone, Hosted
 import { ApiGateway, ApiGatewayDomain } from "aws-cdk-lib/aws-route53-targets";
 import { DomainName, RestApi } from "aws-cdk-lib/aws-apigateway";
 import { SUBDOMAIN, DOMAIN } from "@infrastructure/configuration";
+import { getJomicuRoute53HostZoneID } from "@infrastructure/lib/SSM";
 
 export const getJomicuRoute53 = (context: Construct): IHostedZone => { 
     return HostedZone.fromHostedZoneAttributes(context, "HostedZone", <HostedZoneAttributes>{
         zoneName: DOMAIN,
-        hostedZoneId: "Z0646404XZ8QSBMA3TIY"
+        hostedZoneId: getJomicuRoute53HostZoneID(context)
     });
 }
 

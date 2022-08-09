@@ -1,6 +1,6 @@
 import { Construct } from "constructs";
 import { Stack, StackProps } from "aws-cdk-lib";
-import { getJomicuRoute53, createCnameRecord, createARecord, createAaaaRecord } from "@infrastructure/lib/Route53";
+import { getJomicuRoute53, createARecord, createAaaaRecord } from "@infrastructure/lib/Route53";
 import { getJomicuCertificate } from "@infrastructure/lib/ACM";
 import { buildProductsAPIGateway } from "@infrastructure/lib/APIGateways";
 import { buildCreateProductsLambda } from "@infrastructure/lib/Lambdas";
