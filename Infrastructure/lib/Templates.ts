@@ -29,7 +29,7 @@ export const CreateProductsRequestTemplate = <{ [contentType: string]: string }>
 export const CreateProductsResponsesTemplates = [
     <IntegrationResponse>{
         statusCode: "500",
-        selectionPattern: "/Exception/",
+        selectionPattern: ".*\"message\"\s*:\s*\"Internal Server Error\".*",
         responseTemplates: {
             "application/json": String.raw`
                 {
